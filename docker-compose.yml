@@ -13,4 +13,13 @@ services:
       - /usr/local/app/client/node_modules
     stdin_open: true          # Keep STDIN open for running commands if necessary
     tty: true                 # Allocate a pseudo-TTY for terminal interaction (useful in dev)
-
+  
+  frontend-prod:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: client-production  # Use the production stage
+    ports:
+      - "80:80"  # Serve on port 80 (standard for HTTP)
+    environment:
+      - NODE_ENV=production

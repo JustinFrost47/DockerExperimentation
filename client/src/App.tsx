@@ -8,7 +8,7 @@ import Btns from './btn.tsx'
 
 function App() {
   const [count, setCount] = useState(0)
-
+  console.log(import.meta.env.VITE_APP_BACKEND_ADDRESS)
 
   return (
     <>
@@ -21,7 +21,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React + Docker</h1>
+      <h1>Vite + React + Dockers</h1>
 
       <div className="card">
         <button onClick={() => {setCount((count) => count + 1)
