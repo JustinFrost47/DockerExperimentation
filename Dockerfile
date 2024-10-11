@@ -3,8 +3,8 @@ WORKDIR /usr/local/app
 
 FROM base AS client-base
 WORKDIR /usr/local/app/client
-COPY ./client/package.json ./
-RUN npm install --include=dev
+COPY ./client/package.json ./client/package-lock.json ./
+RUN npm install 
 COPY ./client ./
 
 FROM client-base AS client-dev
