@@ -1,3 +1,5 @@
+# ref https://www.innokrea.com/dockerizing-the-frontend-do-it-right-with-react-js-vite/ for vite
+
 services:
   frontend:
     build:
