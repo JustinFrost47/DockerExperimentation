@@ -1,6 +1,7 @@
 FROM node:22 AS base
 WORKDIR /usr/local/app
 
+# frontend dev
 FROM base AS client-base
 WORKDIR /usr/local/app/client
 COPY ./client/package.json ./client/package-lock.json ./
@@ -12,17 +13,31 @@ EXPOSE 5173
 CMD ["npm", "run", "dev"]
 
 
+# frontend production
+
 FROM base AS client-build
 WORKDIR /usr/local/app/client
-COPY ./client/package.json ./
+COPY ./client/package.json ./client/package-lock.json ./
 RUN npm install --only=production  # Install only production dependencies
 COPY ./client ./
 RUN npm run build  # Create optimized production build
 
-# Stage 2: Serve the client with a lightweight web server
 FROM nginx:alpine AS client-production
 COPY --from=client-build /usr/local/app/client/dist /usr/share/nginx/html
 EXPOSE 80
 
-# Use the default NGINX command to run the server
+
 CMD ["nginx", "-g", "daemon off;"]
+
+
+# backend dev
+
+FROM base AS backend-base
+WORKDIR /usr/local/app/backend
+COPY ./backend/package.json ./backend/package-lock.json ./
+RUN npm install
+COPY ./backend ./
+
+FROM backend-base AS backend-dev
+EXPOSE 5000
+CMD ["npm", "run", "dev"] 

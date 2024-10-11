@@ -1,14 +1,16 @@
+import React from 'react'
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import {  ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import Btns from './btn.tsx'
+import Btns from './btn'
+
 
 function App() {
   const [count, setCount] = useState(0)
-  console.log(import.meta.env.VITE_APP_BACKEND_ADDRESS)
+  // console.log(import.meta.env.VITE_APP_BACKEND_ADDRESS)
 
   return (
     <>

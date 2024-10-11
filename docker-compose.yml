@@ -1,7 +1,7 @@
 # ref https://www.innokrea.com/dockerizing-the-frontend-do-it-right-with-react-js-vite/ for vite
 
 services:
-  frontend:
+  frontend-dev:
     build:
       context: ./
       dockerfile: Dockerfile  # The Dockerfile for the frontend
@@ -23,3 +23,16 @@ services:
       - "80:80"  # Serve on port 80 (standard for HTTP)
     environment:
       - NODE_ENV=production
+
+  backend-dev:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: backend-dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/usr/local/app/backend
+      - /usr/local/app/backend/node_modules
+    stdin_open: true          
+    tty: true                 
