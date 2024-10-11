@@ -41,3 +41,10 @@ COPY ./backend ./
 FROM backend-base AS backend-dev
 EXPOSE 5000
 CMD ["npm", "run", "dev"] 
+
+# backend PROD
+
+FROM backend-base AS backend-production
+EXPOSE 5001
+RUN npm run build
+CMD ["npm", "run", "start"] 

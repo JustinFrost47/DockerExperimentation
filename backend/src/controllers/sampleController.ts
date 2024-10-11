@@ -7,7 +7,7 @@ const sampleController = {
         console.log("hello world")
 
         const response = {
-            message: "Hello World",
+            message: "Hello Worlds",
             status: 200
         }
 
