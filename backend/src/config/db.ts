@@ -1,12 +1,17 @@
-import {Pool} from 'pg'
-import { env } from 'process'
+import { Pool } from 'pg'
 
-const pool = new Pool({
-    connectionString: env.POSTGRES_CONNECTION_STRING
-})
 
-export const query = async (text : string , values? : any[]) => {
-    
-    const response = await pool.query(text, values)
-    return response
+
+  const pool = new Pool({
+      connectionString: process.env.POSTGRES_CONNECTION_STRING
+  });
+
+export const query = async (text: string, values?: any[]) => {
+    try {
+        const response = await pool.query(text, values)
+        return response
+    } catch (err) {
+        console.error('Database query error:', err)
+        throw err
+    }
 }
