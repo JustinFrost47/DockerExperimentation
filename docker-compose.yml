@@ -27,24 +27,33 @@ services:
     stdin_open: true          
     tty: true                 
 
-
-
-  frontend-prod:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-      target: client-production  # Use the production stage
-    ports:
-      - "80:80"  # Serve on port 80 (standard for HTTP)
+  postgres:
+    image: postgres
+    container_name: mobile_postgres
     environment:
-      - NODE_ENV=production
-
-  backend-prod:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-      target: backend-production
+      POSTGRES_USER: justin
+      POSTGRES_PASSWORD: 12345678
     ports:
-      - 5001:5000  # Map port 5001 on host to port 5000 in the container
-    environment:
-      - NODE_ENV=production
+      - "5433:5432"
+    volumes:
+      - ./db/postgres:/var/lib/postgresql/data
+
+  # frontend-prod:
+  #   build:
+  #     context: ./
+  #     dockerfile: Dockerfile
+  #     target: client-production  # Use the production stage
+  #   ports:
+  #     - "80:80"  # Serve on port 80 (standard for HTTP)
+  #   environment:
+  #     - NODE_ENV=production
+
+  # backend-prod:
+  #   build:
+  #     context: ./
+  #     dockerfile: Dockerfile
+  #     target: backend-production
+  #   ports:
+  #     - 5001:5000  # Map port 5001 on host to port 5000 in the container
+  #   environment:
+  #     - NODE_ENV=production
