@@ -1,24 +1,29 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "target": "ES6",
-    "module": "ES6",
-    "moduleResolution": "node",
-    "outDir": "./dist",
-    "rootDir": "./", // Set rootDir to the project root
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "baseUrl": "./", // Adjust baseUrl for imports
+    "jsx": "react-jsx",          // React JSX transformation (automatic)
+    "target": "es2020",          // Use ES2020 for newer features (supports import.meta)
+    "module": "esnext",          // ESNext for module system (supports import.meta)
+    "moduleResolution": "node",  // Resolve modules using Node.js resolution
+    "outDir": "./dist",          // Output directory for compiled files
+    "rootDir": "./",             // Root directory for input files
+    "strict": true,              // Enable strict type checking
+    "esModuleInterop": true,     // Enable interoperability with CommonJS modules
+    "skipLibCheck": true,        // Skip type checking of declaration files
+    "forceConsistentCasingInFileNames": true,  // Enforce consistent casing in imports
+    "baseUrl": "./",             // Base URL for relative imports
     "paths": {
-      "*": ["*"] // Allow relative imports from the project root
-    }
+      "*": ["*"]                 // Enable relative imports from the project root
+    },
+    "resolveJsonModule": true,   // Allow importing JSON files
+    "isolatedModules": true,     // Isolate modules for compatibility with transpilers like Babel
+    "allowSyntheticDefaultImports": true  // Allow default imports even if module doesn't have a default export
   },
   "include": [
-    "src/**/*", // Include all TypeScript files in src
+    "src/**/*", // Include all files in src directory
     "app.ts"    // Explicitly include app.ts
   ],
   "exclude": [
-    "node_modules" // Exclude node_modules
+    "node_modules", // Exclude node_modules directory
+    "dist"          // Exclude the output directory
   ]
 }
