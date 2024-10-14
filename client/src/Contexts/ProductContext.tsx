@@ -3,16 +3,18 @@ import React, {useContext, createContext, useEffect, useState, ReactNode} from '
 import { toast } from 'react-toastify'
 
 export interface ProductType{
-    id: string,
+    id: number,
     name: string,
     image: string,
     description: string,
+    stock: number
 }
 
 export interface ProductContextType {
     products: ProductType[] | null,
     isLoading: boolean,
     error: string | null,
+    refetchProducts: () => Promise<void>,
 }
 
 interface ProductProviderProps {
@@ -28,26 +30,29 @@ export const ProductProvider =  ({children} : ProductProviderProps)  => {
     const [error, setError] = useState<string | null>(null)
     
 
+
+    const fetchProducts = async () => {
+        try{
+
+            const response : AxiosResponse = await axios.get(`${import.meta.env.VITE_APP_BACKEND_URL}phone`)
+            setProducts(response.data.data)
+            setisLoading(false)
+
+        } catch(error) {
+            toast("Unable To Fetch Products")
+            setError('Failed To GET Products')
+            setisLoading(false)
+        }
+    }
+
     useEffect(() => {
 
-        (async () => {
-            try{
-
-                const response : AxiosResponse = await axios.get(`${import.meta.env.VITE_APP_BACKEND_URL}phone`)
-                setProducts(response.data.data)
-                setisLoading(false)
-    
-            } catch(error) {
-                toast("Unable To Fetch Products")
-                setError('Failed To GET Products')
-                setisLoading(false)
-            }
-        })()
+        fetchProducts()
 
     }, [])
 
     return(
-        <ProductContext.Provider value={{products, isLoading, error}}> 
+        <ProductContext.Provider value={{products, isLoading, error, refetchProducts: fetchProducts}}> 
         {children}
         </ProductContext.Provider>
     )
