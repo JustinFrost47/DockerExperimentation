@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { BrowserRouter , Route, Routes } from 'react-router-dom';
+import { ProductProvider } from '../Contexts/ProductContext';
+
 import Sidebar from './ui/Sidebar';
 import NewEntryForm from '../pages/NewEntryForm';
 import Home from '../pages/Home';
@@ -9,6 +11,8 @@ import ProductPage from '../pages/ProductPage'
 
 const RouterTable: React.FC = () => {
   return (
+    <>
+    <ProductProvider>
     <BrowserRouter>
     <Sidebar/>
       <Routes>
@@ -18,6 +22,8 @@ const RouterTable: React.FC = () => {
 
       </Routes>
     </BrowserRouter>
+    </ProductProvider>
+    </>
   );
 };
 

@@ -3,25 +3,32 @@ import { Link } from 'react-router-dom';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import axios, { AxiosResponse } from 'axios';
 import { BounceLoader } from 'react-spinners';
+import { useProducts } from '../../Contexts/ProductContext';
 
+  const initializeSidebarState = () : boolean => {
+    const sidebarState = localStorage.getItem('sidebarState')
+    if(sidebarState && sidebarState?.toLowerCase() === 'true') return true
+    return false
+  } 
 
 export default function Sidebar() {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [products, setProducts] = useState<any[]>([])
+  const [isExpanded, setIsExpanded] = useState<boolean>(initializeSidebarState());
+  const {products} = useProducts()
+
 
   useEffect(() => {
-    (async () => {
-      
-      const response : AxiosResponse = await axios.get(import.meta.env.VITE_APP_BACKEND_URL + 'phone')
-      setProducts(response.data.data)
-      console.log(response.data.data)
-    })()
-    
-  }, [])
- 
+    localStorage.setItem('sidebarState', String(isExpanded))
+  }, [isExpanded])
+
+
+
+
+
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
   };
+
+
 
   return (
     <div
@@ -32,9 +39,11 @@ export default function Sidebar() {
     {/* Sidebar Content */}
     {isExpanded && (
       <>
-        <div className='text-tred text-3xl font-serif flex flex-col items-center m-4 mb-28'>
+      <Link to="/">
+      <div className='text-tred text-3xl font-serif flex flex-col items-center m-4 mb-28'>
           StockTracker
         </div>
+      </Link>
         <div className="flex flex-col items-center">
         <Link to="/new" className="text-twhite mb-4 underline">
           AddItems
@@ -42,7 +51,7 @@ export default function Sidebar() {
 
         <div className="flex flex-col items-center text-twhite">
           <p className='text-tred text-2xl my-4'> Products</p>
-            {products.length>0 ? (
+            {products && products.length>0 ? (
               products.map((product) =>(
             <Link key={product.id} to={`/product/${product.id}`} className="text-twhite mb-4 underline ">
               {product.name}
