@@ -4,15 +4,15 @@ services:
   frontend-dev:
     build:
       context: ./
-      dockerfile: Dockerfile  # The Dockerfile for the frontend
-      target: client-dev      # Use the client-dev stage from the Dockerfile
+      dockerfile: Dockerfile 
+      target: client-dev     
     ports:
-      - "5173:5173"           # Expose Vite's default port (adjust if necessary)
+      - "5173:5173"          
     volumes:
-      - ./client:/usr/local/app/client  # Mount your local client directory for live reload
+      - ./client:/usr/local/app/client  
       - /usr/local/app/client/node_modules
-    stdin_open: true          # Keep STDIN open for running commands if necessary
-    tty: true                 # Allocate a pseudo-TTY for terminal interaction (useful in dev)
+    stdin_open: true          
+    tty: true                 
 
   backend-dev:
     build:
