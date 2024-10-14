@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {  toast } from 'react-toastify';
 
+
 const NewEntryForm: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -41,6 +42,7 @@ const NewEntryForm: React.FC = () => {
         setFormData({ name: '', stock: '', image: '', description: '' });
 
         toast('Phone entry added successfully!');
+        location.reload()
       }
     } catch (err) {
         toast('Failed to add entry. Please try again.');
@@ -49,7 +51,9 @@ const NewEntryForm: React.FC = () => {
   };
 
   return (
-    <div className="bg-tblack text-twhite p-6 rounded-lg shadow-lg w-full max-w-md mx-auto">
+<>
+
+<div className="bg-tblack text-twhite p-6 rounded-lg shadow-lg w-full max-w-md mx-auto">
       <h2 className="text-3xl mb-4 text-tred text-center">New Phone Entry</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -115,6 +119,7 @@ const NewEntryForm: React.FC = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 

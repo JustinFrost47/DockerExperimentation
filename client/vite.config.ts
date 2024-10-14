@@ -11,5 +11,13 @@ export default defineConfig({
     //  watch: {
     //    usePolling: true
     //  }
-  }
+  },
+  optimizeDeps: {
+    include: ['react-icons'],  // Include react-icons in optimization
+  },
+  build: {
+    rollupOptions: {
+      external: ['react-icons'], // Treat react-icons as an external dependency during build
+    },
+  },
 })
