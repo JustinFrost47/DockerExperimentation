@@ -8,7 +8,7 @@ export const mobileDB = {
                 id SERIAL PRIMARY KEY UNIQUE,
                 name VARCHAR(20),
                 stock INT,
-                image VARCHAR(50),
+                image VARCHAR,
                 description VARCHAR(200)
             );
         `;
