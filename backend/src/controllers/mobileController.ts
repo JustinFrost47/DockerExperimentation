@@ -59,8 +59,8 @@ export const mobileController = {
 
     
     increaseStock : async (req : Request, res : Response) => {
-        const {id} = req.params
-        let {amount} = req.body
+
+        let {amount, id} = req.body
 
         if (typeof amount !== 'number') {
             res.status(400).json({ message: 'Amount must be a number' });
@@ -77,8 +77,8 @@ export const mobileController = {
     },
 
     decreaseStock : async (req : Request, res : Response) => {
-        const {id} = req.params
-        let {amount} = req.body
+
+        let {amount, id} = req.body
         
         if (typeof amount !== 'number') {
             res.status(400).json({ message: 'Amount must be a number' });
