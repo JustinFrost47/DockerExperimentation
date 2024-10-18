@@ -1,7 +1,3 @@
-Here's a structured and grounded `README.md` for your GitHub repo:
-
----
-
 # Fullstack Application with Docker & PERN Stack
 
 This is a fullstack web application I built while exploring Docker and the PERN stack (PostgreSQL, Express, React, Node.js). The purpose of this project was to experiment with Docker Compose and get hands-on experience with a modern tech stack while learning how to orchestrate different services effectively. 
@@ -105,3 +101,4 @@ This project served as a hands-on experiment to solidify my understanding of Doc
 
 
 Feel free to reach out if you have any questions, or if you would like to collaborate on similar projects!
+
