@@ -7,7 +7,7 @@ import { ProductProvider } from '../Contexts/ProductContext';
 import Sidebar from './ui/Sidebar';
 import NewEntryForm from '../pages/NewEntryForm';
 import Home from '../pages/Home';
-import ProductPage from '../pages/ProductPage'
+import ProductPage from '../pages/Product/ProductPage'
 
 const RouterTable: React.FC = () => {
   return (

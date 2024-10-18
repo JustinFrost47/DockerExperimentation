@@ -2,9 +2,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {  toast } from 'react-toastify';
+import { useProducts } from '../Contexts/ProductContext';
 
 
 const NewEntryForm: React.FC = () => {
+
+  const {refetchProducts} = useProducts()
   const [formData, setFormData] = useState({
     name: '',
     stock: '',
@@ -42,7 +45,7 @@ const NewEntryForm: React.FC = () => {
         setFormData({ name: '', stock: '', image: '', description: '' });
 
         toast('Phone entry added successfully!');
-        location.reload()
+        refetchProducts()
       }
     } catch (err) {
         toast('Failed to add entry. Please try again.');
